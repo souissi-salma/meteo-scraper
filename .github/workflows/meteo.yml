@@ -1,0 +1,26 @@
+name: Exécuter script météo
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Exécuter chaque heure
+  workflow_dispatch:  # Permet d'exécuter manuellement
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: Installer Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+
+      - name: Installer les dépendances
+        run: pip install requests psycopg2-binary
+
+      - name: Exécuter le script météo
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+        run: python script.py
