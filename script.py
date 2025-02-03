@@ -4,7 +4,7 @@ import datetime
 import os
 
 # Clé API OpenWeatherMap
-API_KEY = "TA_CLE_API"
+API_KEY = "7d6b0f67a3d19b1f1307961b12657cf4"
 
 # Liste des régions avec leurs coordonnées
 regions = {
