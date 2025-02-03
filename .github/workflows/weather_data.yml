@@ -24,14 +24,14 @@ jobs:
 
     - name: Run script
       run: python script.py
-
-    - name: Commit and push CSV file
+    - name: Commit and Push CSV
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
         git add data/*.csv
-        git commit -m "Add weather data for $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
+        git commit -m "Add weather data for $(date +'%Y-%m-%d %H:%M')"
         git push
+   
     - name: Send error alert to Telegram
       if: failure()
       run: |
