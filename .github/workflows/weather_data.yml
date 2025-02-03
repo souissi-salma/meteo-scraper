@@ -25,12 +25,15 @@ jobs:
     - name: Run script
       run: python script.py
     - name: Commit and Push CSV
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
         git add data/*.csv
-        git commit -m "Add weather data for $(date +'%Y-%m-%d %H:%M')"
-        git push
+        git commit -m "Add weather data for $(date +'%Y-%m-%d %H:%M')" || exit 0
+        git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
    
     - name: Send error alert to Telegram
       if: failure()
